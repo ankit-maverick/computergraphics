@@ -13,7 +13,8 @@ OBJECTS = main.o\
 			 Room.o\
 			 mouseHandler.o\
 			 bezier.o\
-			 loadTexture.o		
+			 loadTexture.o\
+			 fileHandler.o	
 		
 All: $(OBJECTS)
 	$(CC) -o MusicBox $(OBJECTS) $(LINKFLAGS)

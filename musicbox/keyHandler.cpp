@@ -319,25 +319,25 @@ void keyHandler(unsigned char key, int x, int y){
 
     else if(key == 'H'){
         light0 = 1; //Start adding points
-        cerr << "Light0 on" <<endl;
+        cerr << "Wall-mounted light on" <<endl;
         glEnable(GL_LIGHT0);
     }
     
     else if(key == 'J'){
         light0 = 0; //Stop adding points
         glDisable(GL_LIGHT0);
-        cerr << "Light0 off" <<endl;
+        cerr << "Wall-mounted light off" <<endl;
     }
 
     else if(key == 'K'){
-        light1 = 1; //Start adding 
-        cerr << "Light1 on" <<endl;
+        light1 = 1;
+        cerr << "Table-Lamp on" <<endl;
         glEnable(GL_LIGHT1);
     }
     
     else if(key == 'L'){
-        light1 = 0; //Stop adding points
-        cerr << "Light1 o" <<endl;
+        light1 = 0;
+        cerr << "Table-Lamp off" <<endl;
         glDisable(GL_LIGHT1);
     }
 
@@ -350,7 +350,16 @@ void keyHandler(unsigned char key, int x, int y){
         flythru(0);
     }
  
- 
+    else if(key == 'S'){
+        cerr << "Saved the current keyframe." << endl;
+        write_keyframe();
+    }
+
+    else if(key == 'C'){
+        cerr << "Cleared keyframes.txt file." << endl;
+        clear_keyframes();
+    }
+
 	glutPostRedisplay();
 }
 /*

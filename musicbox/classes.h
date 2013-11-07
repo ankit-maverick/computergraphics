@@ -21,6 +21,11 @@ void drawBox(GLuint);
 void drawBody(GLuint, GLuint);
 void updateLookat();
 GLuint LoadTexture(const char* filepath);
+
+int write_keyframe();
+void clear_keyframes();
+int read_keyframes();
+
 /*
 extern int WIN_WIDTH;
 

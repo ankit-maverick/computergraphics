@@ -1,6 +1,7 @@
 
 #include <iostream>
-#include <cstdlib> // C++ standard definitions
+#include <fstream>
+#include <cstdlib>
 #include <stdio.h>
 
 #ifdef __APPLE__
@@ -145,8 +146,6 @@ void updateXYZ()
     eye_y = r*cos(theta1);
     eye_z = r*sin(theta1)*cos(phi1);
 
-    //cerr<<r<<","<<theta<<","<<phi<<"\t";
-    //cerr<<eye_x<<","<<eye_y<<","<<eye_z<<endl;
 }
 
 void updateLookAt()
@@ -216,19 +215,21 @@ void display(void){
                     1000.0);// Z far
 
     updateLookAt();
-    //glRotatef(180, 0.0, 1.0, 0.0);
-    //glLoadIdentity();
-/*
-    gluLookat(0.0, 0.0, -10.0,  // eye position
-              0.0, 0.0, 0.0,    // center
-              0.0, 1.0, 0.0);   // up vector
-*/
-    //glTranslatef(0.0, 0.0, 1.0);
-    //glRotatef( rotate_x, 1.0, 0.0, 0.0 );
-    //glRotatef( rotate_y, 0.0, 1.0, 0.0 );
-    //glRotatef(180, 0.0, 0.0, 1.0);
-    //glTranslatef(0.0, 0.0, 1.0);
 
+    //Configuring GL_LIGHT1 i.e. Table Lamp
+    GLfloat light_ambient1[] = {0.7, 0.7, 0.7, 1.0};
+    GLfloat light_diffuse1[] = {1.0, 1.0, 1.0, 1.0};
+    GLfloat light_specular1[] = {0.0, 1.0, 0.0, 1.0};
+    GLfloat light_position1[] = {-0.2, 0.35, 0.60, 1.0};
+    GLfloat light_direction1[] = {1.0,-0.5,0.0};
+
+    glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient1);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse1);
+    glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular1);
+    glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
+    glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light_direction1);
+    glLightf(GL_LIGHT1,GL_SPOT_CUTOFF, 60);
+    
     // Room cuboid
     glPushMatrix();
         glTranslatef(0.0, 0.1, 0.0);
@@ -368,7 +369,7 @@ void init(void){
 
 
 
-  glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_TEXTURE_2D);
@@ -388,6 +389,7 @@ void init(void){
     glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular0);
     glLightfv(GL_LIGHT0, GL_POSITION, light_position0);
 
+/*
     //Configuring GL_LIGHT1 i.e. Table Lamp
     GLfloat light_ambient1[] ={0.7, 0.7, 0.7, 1.0};
     GLfloat light_diffuse1[] ={1.0, 1.0, 1.0, 1.0};
@@ -401,7 +403,7 @@ void init(void){
     glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
     glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light_direction1);
     glLightf(GL_LIGHT1,GL_SPOT_CUTOFF, 60);
-        
+*/       
 
 
 /*
