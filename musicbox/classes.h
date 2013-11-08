@@ -16,21 +16,18 @@ using namespace std;
 void mouseHandler(int button, int state, int x, int y);
 void reshapeHandler( int w, int h );
 void keyHandler(unsigned char key, int x, int y);
-//void specialKeys( int key, int x, int y );
+
 void drawBox(GLuint);
 void drawBody(GLuint, GLuint);
+
 void updateLookat();
 GLuint LoadTexture(const char* filepath);
 
 int write_keyframe();
 void clear_keyframes();
-int read_keyframes();
+int read_keyframes_and_playback();
 
-/*
-extern int WIN_WIDTH;
 
-extern unsigned char keyMode;
-*/
 
 extern float eye_x;
 extern float eye_y;
@@ -40,10 +37,8 @@ extern float center_x;
 extern float center_y;
 extern float center_z;
 
-
 extern float dancer_pos;
 extern unsigned char keyMode;
-//float mouth_speak = 0.005;
 
 extern int WIN_WIDTH;
 extern int WIN_HEIGHT;

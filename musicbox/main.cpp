@@ -251,6 +251,14 @@ void display(void){
         draw_table_lamp(rod1_tex, rod2_tex, lamp_base_tex);
     glPopMatrix();
 
+    if (light1 == true){
+        glEnable(GL_LIGHT1);
+    }
+    else if(light1 == false){
+        glDisable(GL_LIGHT1);
+    }
+
+
     // Door
     glPushMatrix();
         glTranslatef(0.7, -0.05, 0.8);
@@ -279,6 +287,13 @@ void display(void){
         glRotatef(180, 0.0, 1.0, 0.0);
         draw_wall_mounted_lamp(wall_mounted_lamp_base_tex);
     glPopMatrix();
+
+    if (light0 == true){
+        glEnable(GL_LIGHT0);
+    }
+    else if(light0 == false){
+        glDisable(GL_LIGHT0);
+    }
 
     // Bed
     glPushMatrix();
@@ -441,8 +456,9 @@ int main(int argc, char* argv[]){
     glutInitWindowSize (WIN_WIDTH, WIN_HEIGHT);
     glutInitWindowPosition (100, 100);
 
-    glutCreateWindow(" Shelter ");
- 
+    glutCreateWindow("MusicBox!!");
+    clear_keyframes();
+
     glEnable(GL_DEPTH_TEST);
  	glClearColor(0.0f,0.0f,0.0f, 1.0f);
 
