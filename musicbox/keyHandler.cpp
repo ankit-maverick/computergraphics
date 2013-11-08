@@ -35,6 +35,61 @@ void keyHandler(unsigned char key, int x, int y){
 
      }
 
+     else if (key == '3'){
+         rot_neck_z -= 5;
+         if (rot_neck_z < -90)
+             rot_neck_z = -90;
+
+     }
+
+     else if (key == '4'){
+         rot_neck_z += 5;
+         if (rot_neck_z > 90)
+             rot_neck_z = 90;
+
+     }
+
+    else if (key == '1'){
+         rotate_x -= 5;
+         if (rotate_x < -90)
+             rotate_x = -90;
+
+     }
+
+     else if (key == '2'){
+         rotate_x += 5;
+         if (rotate_x > 90)
+             rotate_x = 90;
+
+     }
+
+     else if (key == '3'){
+         rotate_y -= 5;
+         if (rotate_y < -90)
+             rotate_y = -90;
+
+     }
+
+     else if (key == '4'){
+         rotate_y += 5;
+         if (rotate_y > 90)
+             rotate_y = 90;
+
+     }
+
+     else if (key == '3'){
+         rotate_z -= 5;
+         if (rotate_z < -90)
+             rotate_z = -90;
+
+     }
+
+     else if (key == '4'){
+         rotate_z += 5;
+         if (rotate_z > 90)
+             rotate_z = 90;
+
+     }
 
      else if (key == 'c'){
          rot_left_elbow -= 5;
@@ -74,6 +129,19 @@ void keyHandler(unsigned char key, int x, int y){
              rot_right_shoulder_x = 355;
      }
 
+     else if (key == 'q'){
+         rot_right_shoulder_y -= 5;
+         if (rot_right_shoulder_y < 0)
+             rot_right_shoulder_y = 0;
+     }
+
+
+     else if (key == 'w'){
+         rot_right_shoulder_y += 5;
+         if (rot_right_shoulder_y > 355)
+             rot_right_shoulder_y = 355;
+     }
+
 
      else if (key == 'a'){
          rot_right_shoulder_z -= 5;
@@ -100,6 +168,19 @@ void keyHandler(unsigned char key, int x, int y){
          rot_left_shoulder_x += 5;
          if (rot_left_shoulder_x > 355)
              rot_left_shoulder_x = 355;
+     }
+
+     else if (key == 'e'){
+         rot_left_shoulder_y -= 5;
+         if (rot_left_shoulder_y < 0)
+             rot_left_shoulder_y = 0;
+     }
+
+
+     else if (key == 'r'){
+         rot_left_shoulder_y += 5;
+         if (rot_left_shoulder_y > 355)
+             rot_left_shoulder_y = 355;
      }
 
 
@@ -131,6 +212,18 @@ void keyHandler(unsigned char key, int x, int y){
              rot_right_hip_x = 60;
      }
 
+     else if (key == 't'){
+         rot_right_hip_y -= 5;
+         if (rot_right_hip_y < -60)
+             rot_right_hip_y = -60;
+     }
+
+
+     else if (key == 'y'){
+         rot_right_hip_y += 5;
+         if (rot_right_hip_y > 60)
+             rot_right_hip_y = 60;
+     }
 
      else if (key == 'g'){
          rot_right_hip_z -= 5;
@@ -157,6 +250,19 @@ void keyHandler(unsigned char key, int x, int y){
          rot_left_hip_x += 5;
          if (rot_left_hip_x > 60)
              rot_left_hip_x = 60;
+     }
+
+     else if (key == 'u'){
+         rot_left_hip_y -= 5;
+         if (rot_left_hip_y < -60)
+             rot_left_hip_y = -60;
+     }
+
+
+     else if (key == 'i'){
+         rot_left_hip_y += 5;
+         if (rot_left_hip_y > 60)
+             rot_left_hip_y = 60;
      }
 
 
@@ -203,57 +309,164 @@ void keyHandler(unsigned char key, int x, int y){
 
      // Right Ankle
      else if (key == '5'){
-         rot_right_ankle += 5;
-         if (rot_right_ankle > 65)
-             rot_right_ankle = 65;
+         rot_right_ankle_x += 5;
+         if (rot_right_ankle_x > 65)
+             rot_right_ankle_x = 65;
 
      }
 
      else if (key == '6'){
-         rot_right_ankle -= 5;
-         if (rot_right_ankle < 0)
-             rot_right_ankle = 0;
+         rot_right_ankle_x -= 5;
+         if (rot_right_ankle_x < 0)
+             rot_right_ankle_x = 0;
      }
+
+     else if (key == '5'){
+         rot_right_ankle_y += 5;
+         if (rot_right_ankle_y > 65)
+             rot_right_ankle_y = 65;
+
+     }
+
+     else if (key == '6'){
+         rot_right_ankle_y -= 5;
+         if (rot_right_ankle_y < 0)
+             rot_right_ankle_y = 0;
+     }
+
+     else if (key == '5'){
+         rot_right_ankle_z += 5;
+         if (rot_right_ankle_z > 65)
+             rot_right_ankle_z = 65;
+
+     }
+
+     else if (key == '6'){
+         rot_right_ankle_z -= 5;
+         if (rot_right_ankle_z < 0)
+             rot_right_ankle_z = 0;
+     }
+
 
      // Left Ankle
      else if (key == '7'){
-         rot_left_ankle += 5;
-         if (rot_left_ankle > 65)
-             rot_left_ankle = 65;
+         rot_left_ankle_x += 5;
+         if (rot_left_ankle_x > 65)
+             rot_left_ankle_x = 65;
 
      }
 
      else if (key == '8'){
-         rot_left_ankle -= 5;
-         if (rot_left_ankle < 0)
-             rot_left_ankle = 0;
+         rot_left_ankle_x -= 5;
+         if (rot_left_ankle_x < 0)
+             rot_left_ankle_x = 0;
      }
 
+     else if (key == '7'){
+         rot_left_ankle_y += 5;
+         if (rot_left_ankle_y > 65)
+             rot_left_ankle_y = 65;
+
+     }
+
+     else if (key == '8'){
+         rot_left_ankle_y -= 5;
+         if (rot_left_ankle_y < 0)
+             rot_left_ankle_y = 0;
+     }
+
+     else if (key == '7'){
+         rot_left_ankle_z += 5;
+         if (rot_left_ankle_z > 65)
+             rot_left_ankle_z = 65;
+
+     }
+
+     else if (key == '8'){
+         rot_left_ankle_z -= 5;
+         if (rot_left_ankle_z < 0)
+             rot_left_ankle_z = 0;
+     }
+
+
+
      else if (key == 'o'){
-         rot_right_wrist += 5;
-         if (rot_right_wrist > 65)
-             rot_right_wrist = 65;
+         rot_right_wrist_x += 5;
+         if (rot_right_wrist_x > 65)
+             rot_right_wrist_x = 65;
 
      }
 
      else if (key == 'p'){
-         rot_right_wrist -= 5;
-         if (rot_right_wrist < -30)
-             rot_right_wrist = -30;
+         rot_right_wrist_x -= 5;
+         if (rot_right_wrist_x < -30)
+             rot_right_wrist_x = -30;
      }
 
-     // Left Ankle
+     else if (key == 'o'){
+         rot_right_wrist_y += 5;
+         if (rot_right_wrist_y > 65)
+             rot_right_wrist_y = 65;
+
+     }
+
+     else if (key == 'p'){
+         rot_right_wrist_y -= 5;
+         if (rot_right_wrist_y < -30)
+             rot_right_wrist_y = -30;
+     }
+
+     else if (key == 'o'){
+         rot_right_wrist_z += 5;
+         if (rot_right_wrist_z > 65)
+             rot_right_wrist_z = 65;
+
+     }
+
+     else if (key == 'p'){
+         rot_right_wrist_z -= 5;
+         if (rot_right_wrist_z < -30)
+             rot_right_wrist_z = -30;
+     }
+
+
      else if (key == '['){
-         rot_left_wrist += 5;
-         if (rot_left_wrist > 30)
-             rot_left_wrist = 30;
+         rot_left_wrist_x += 5;
+         if (rot_left_wrist_x > 30)
+             rot_left_wrist_x = 30;
 
      }
 
      else if (key == ']'){
-         rot_left_wrist -= 5;
-         if (rot_left_wrist < -60)
-             rot_left_wrist = -60;
+         rot_left_wrist_x -= 5;
+         if (rot_left_wrist_x < -60)
+             rot_left_wrist_x = -60;
+     }
+
+     else if (key == '['){
+         rot_left_wrist_y += 5;
+         if (rot_left_wrist_y > 30)
+             rot_left_wrist_y = 30;
+
+     }
+
+     else if (key == ']'){
+         rot_left_wrist_y -= 5;
+         if (rot_left_wrist_y < -60)
+             rot_left_wrist_y = -60;
+     }
+
+     else if (key == '['){
+         rot_left_wrist_z += 5;
+         if (rot_left_wrist_z > 30)
+             rot_left_wrist_z = 30;
+
+     }
+
+     else if (key == ']'){
+         rot_left_wrist_z -= 5;
+         if (rot_left_wrist_z < -60)
+             rot_left_wrist_z = -60;
      }
 
 
@@ -284,36 +497,53 @@ void keyHandler(unsigned char key, int x, int y){
              rot_torso2_y = -45;
      }
 
+     else if (key == '.'){
+         rot_torso2_z += 5;
+         if (rot_torso2_z > 45)
+             rot_torso2_z = 45;
+
+     }
+
+     else if (key == '/'){
+         rot_torso2_z -= 5;
+         if (rot_torso2_z < -45)
+             rot_torso2_z = -45;
+     }
+
+
 
      else if (key == '0'){
-         cerr << mouth_speak << endl;
-         if (mouth_speak == -0.005)
-             mouth_speak = 0.005;
-         else if (mouth_speak == 0.005)
-             mouth_speak = -0.005;
+         cerr << mouthspeak << endl;
+         if (mouthspeak > 0.004){
+             mouthspeak = -0.005;
+             cerr << mouthspeak << endl;
+         }
+         
+         else if (mouthspeak < -0.004)
+             mouthspeak = 0.005;
      }
 
 
 	else if (key == '-'){
-		if(lid_angle>-90)
-			lid_angle--;
+		if(lid_angle>-150)
+			lid_angle = lid_angle - 5;
 	}
 	
 	
 	else if (key == '='){
 		if(lid_angle<0 && dancer_pos<0.2)
-			lid_angle++;
+			lid_angle = lid_angle + 5;
 	}
 	
 	else if (key == '('){
 		if(lid_angle<-80){
-			dancer_pos+=0.2;
+			dancer_pos+=0.04;
 		}
 	}
 	
 	else if (key == ')'){
 		if(dancer_pos>0){
-			dancer_pos-=0.2;
+			dancer_pos-=0.04;
 		}
 	}
 

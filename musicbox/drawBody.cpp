@@ -37,6 +37,7 @@ void drawBody(GLuint skin, GLuint hair){
 
         // Torso 2
         glPushMatrix();
+            glRotatef(rot_torso2_z, 0.0, 0.0, 1.0);
             glRotatef(rot_torso2_x, 0.0, 1.0, 0.0);
             glRotatef(rot_torso2_y, 1.0, 0.0, 0.0);
             glPushMatrix();
@@ -60,6 +61,7 @@ void drawBody(GLuint skin, GLuint hair){
                     // Head
                     glPushMatrix();
                         glTranslatef(0.0, 0.17, 0.0);
+                        glRotatef(rot_neck_z, 0.0, 0.0, 1.0);
                         glRotatef(rot_neck_x, 0.0, 1.0, 0.0);
                         glRotatef(rot_neck_y, 1.0, 0.0, 0.0);
                         glPushMatrix();
@@ -86,7 +88,7 @@ void drawBody(GLuint skin, GLuint hair){
 
                         // Mouth
                         glPushMatrix();
-                            glTranslatef(0.0, 0.0, mouth_speak);
+                            glTranslatef(0.0, 0.0, mouthspeak);
                             glTranslatef(0.0, -0.07, -0.04);
                             glCallList(mouth);
                         glPopMatrix();
@@ -104,6 +106,7 @@ void drawBody(GLuint skin, GLuint hair){
                 // Right Shoulder
                 glPushMatrix();
                     glTranslatef(-0.23, -0.05, 0.0);
+                    glRotatef(rot_right_shoulder_y, 0.0, 1.0, 0.0);
                     glRotatef(rot_right_shoulder_x, 0.0, 0.0, 1.0);
                     glRotatef(rot_right_shoulder_z, 1.0, 0.0, 0.0); 
                     glPushMatrix();
@@ -135,7 +138,9 @@ void drawBody(GLuint skin, GLuint hair){
                                 // Right Wrist
                                 glPushMatrix();
                                     glTranslatef(0.0, -0.35, 0.0);
-                                    glRotatef(rot_right_wrist, 0.0, 0.0, 1.0);
+                                    glRotatef(rot_right_wrist_x, 1.0, 0.0, 0.0);
+                                    glRotatef(rot_right_wrist_y, 0.0, 1.0, 0.0);
+                                    glRotatef(rot_right_wrist_z, 0.0, 0.0, 1.0);
                                     glPushMatrix();
                                         glCallList(wrist);
                                     glPopMatrix();
@@ -155,6 +160,7 @@ void drawBody(GLuint skin, GLuint hair){
                 // Left Shoulder
                 glPushMatrix();
                     glTranslatef(0.23, -0.05, 0.0);
+                    glRotatef(rot_left_shoulder_y, 0.0, 1.0, 0.0);
                     glRotatef(rot_left_shoulder_x, 0.0, 0.0, 1.0);
                     glRotatef(rot_left_shoulder_z, 1.0, 0.0, 0.0);
                     glPushMatrix();
@@ -186,7 +192,9 @@ void drawBody(GLuint skin, GLuint hair){
                                 // Left Wrist
                                 glPushMatrix();
                                     glTranslatef(0.0, -0.35, 0.0);
-                                    glRotatef(rot_left_wrist, 0.0, 0.0, 1.0);
+                                    glRotatef(rot_left_wrist_x, 1.0, 0.0, 0.0);
+                                    glRotatef(rot_left_wrist_y, 0.0, 1.0, 0.0);
+                                    glRotatef(rot_left_wrist_z, 0.0, 0.0, 1.0);
                                     glPushMatrix();
                                         glCallList(wrist);
                                     glPopMatrix();
@@ -207,6 +215,7 @@ void drawBody(GLuint skin, GLuint hair){
                 glPushMatrix();
                     //Right Hip
                     glTranslatef(-0.1, -0.28, 0.0);
+                    glRotatef(rot_right_hip_y, 0.0, 1.0, 0.0);
                     glRotatef(rot_right_hip_x, 0.0, 0.0, 1.0);
                     glRotatef(rot_right_hip_z, 1.0, 0.0, 0.0);
                     glPushMatrix();
@@ -237,7 +246,9 @@ void drawBody(GLuint skin, GLuint hair){
                             // Right Ankle
                             glPushMatrix();
                                 glTranslatef(0.0, -0.4, 0.0);
-                                glRotatef(-rot_right_ankle, 1.0, 0.0, 0.0);
+                                glRotatef(-rot_right_ankle_x, 1.0, 0.0, 0.0);
+                                glRotatef(rot_right_ankle_y, 0.0, 1.0, 0.0);
+                                glRotatef(rot_right_ankle_z, 0.0, 0.0, 1.0);
                                 glPushMatrix();
                                     glCallList(ankle);
                                 glPopMatrix();
@@ -257,6 +268,7 @@ void drawBody(GLuint skin, GLuint hair){
                 glPushMatrix();
                     // Left Hip
                     glTranslatef(0.1, -0.28, 0.0);
+                    glRotatef(rot_left_hip_y, 0.0, 1.0, 0.0);
                     glRotatef(rot_left_hip_x, 0.0, 0.0, 1.0);
                     glRotatef(rot_left_hip_z, 1.0, 0.0, 0.0);
                     glCallList(hip);
@@ -285,7 +297,9 @@ void drawBody(GLuint skin, GLuint hair){
                             // Left Ankle
                             glPushMatrix();
                                 glTranslatef(0.0, -0.4, 0.0);
-                                glRotatef(-rot_left_ankle, 1.0, 0.0, 0.0);
+                                glRotatef(-rot_left_ankle_x, 1.0, 0.0, 0.0);
+                                glRotatef(rot_left_ankle_y, 0.0, 1.0, 0.0);
+                                glRotatef(rot_left_ankle_z, 0.0, 0.0, 1.0);
                                 glPushMatrix();
                                     glCallList(ankle);
                                 glPopMatrix();

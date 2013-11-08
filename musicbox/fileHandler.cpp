@@ -10,7 +10,7 @@ using namespace std;
 
 int num_keyframes = 0;
 int num_interpolated = 0;
-int num_kf_parameters = 31;
+int num_kf_parameters = 48;
 int playback_frame_no = 0;
 int between_frames = 10;
 
@@ -25,26 +25,43 @@ int between_frames = 10;
     bool light1_int[15000];
     int lid_angle_int[15000];
     float dancer_pos_int[15000];
+    int rotate_x_int[15000];
+    int rotate_y_int[15000];
+    int rotate_z_int[15000];
     int rot_neck_x_int[15000];
     int rot_neck_y_int[15000];
+    int rot_neck_z_int[15000];
     int rot_right_shoulder_x_int[15000];
+    int rot_right_shoulder_y_int[15000];
     int rot_right_shoulder_z_int[15000];
     int rot_left_shoulder_x_int[15000];
+    int rot_left_shoulder_y_int[15000];
     int rot_left_shoulder_z_int[15000];
     int rot_right_elbow_int[15000];
     int rot_left_elbow_int[15000];
-    int rot_right_wrist_int[15000];
-    int rot_left_wrist_int[15000];
+    int rot_right_wrist_x_int[15000];
+    int rot_left_wrist_x_int[15000];
+    int rot_right_wrist_y_int[15000];
+    int rot_left_wrist_y_int[15000];
+    int rot_right_wrist_z_int[15000];
+    int rot_left_wrist_z_int[15000];
     int rot_right_hip_x_int[15000];
+    int rot_right_hip_y_int[15000];
     int rot_right_hip_z_int[15000];
     int rot_left_hip_x_int[15000];
+    int rot_left_hip_y_int[15000];
     int rot_left_hip_z_int[15000];
     int rot_right_knee_int[15000];
     int rot_left_knee_int[15000];
-    int rot_right_ankle_int[15000];
-    int rot_left_ankle_int[15000];
+    int rot_right_ankle_x_int[15000];
+    int rot_left_ankle_x_int[15000];
+    int rot_right_ankle_y_int[15000];
+    int rot_left_ankle_y_int[15000];
+    int rot_right_ankle_z_int[15000];
+    int rot_left_ankle_z_int[15000];
     int rot_torso2_x_int[15000];
     int rot_torso2_y_int[15000];
+    int rot_torso2_z_int[15000];
     float mouthspeak_int[15000];
 
 
@@ -62,7 +79,7 @@ int write_keyframe() {
     ofstream myfile ("keyframes.txt", std::ios_base::app);
     if (myfile.is_open())
     {
-        myfile << eye_x <<  dlmtr << eye_y << dlmtr << eye_z << dlmtr << center_x << dlmtr << center_y << dlmtr << center_z << dlmtr << light0 << dlmtr << light1 << dlmtr << lid_angle << dlmtr << dancer_pos << dlmtr << rot_neck_x << dlmtr << rot_neck_y << dlmtr << rot_right_shoulder_x << dlmtr << rot_right_shoulder_z << dlmtr << rot_left_shoulder_x << dlmtr << rot_left_shoulder_z << dlmtr << rot_right_elbow << dlmtr << rot_left_elbow << dlmtr << rot_right_wrist << dlmtr << rot_left_wrist << dlmtr << rot_right_hip_x << dlmtr << rot_right_hip_z << dlmtr << rot_left_hip_x << dlmtr << rot_left_hip_z << dlmtr << rot_right_knee << dlmtr << rot_left_knee << dlmtr << rot_right_ankle << dlmtr << rot_left_ankle << dlmtr << rot_torso2_x << dlmtr << rot_torso2_y << dlmtr << mouth_speak <<"\n";
+        myfile << eye_x <<  dlmtr << eye_y << dlmtr << eye_z << dlmtr << center_x << dlmtr << center_y << dlmtr << center_z << dlmtr << light0 << dlmtr << light1 << dlmtr << lid_angle << dlmtr << dancer_pos << dlmtr << rotate_x << dlmtr << rotate_y << dlmtr << rotate_z << dlmtr << rot_neck_x << dlmtr << rot_neck_y << dlmtr << rot_neck_z << dlmtr << rot_right_shoulder_x << dlmtr << rot_right_shoulder_y << dlmtr << rot_right_shoulder_z << dlmtr << rot_left_shoulder_x << dlmtr << rot_left_shoulder_y << dlmtr << rot_left_shoulder_z << dlmtr << rot_right_elbow << dlmtr << rot_left_elbow << dlmtr << rot_right_wrist_x << dlmtr << rot_right_wrist_y << dlmtr << rot_right_wrist_z << dlmtr << rot_left_wrist_x << dlmtr << rot_left_wrist_y << dlmtr << rot_left_wrist_z << dlmtr << rot_right_hip_x << dlmtr << rot_right_hip_y << dlmtr << rot_right_hip_z << dlmtr << rot_left_hip_x << dlmtr << rot_left_hip_y << dlmtr << rot_left_hip_z << dlmtr << rot_right_knee << dlmtr << rot_left_knee << dlmtr << rot_right_ankle_x << dlmtr << rot_right_ankle_y << dlmtr << rot_right_ankle_z << dlmtr << rot_left_ankle_x << dlmtr << rot_left_ankle_y << dlmtr << rot_left_ankle_z << dlmtr << rot_torso2_x << dlmtr << rot_torso2_y << dlmtr << rot_torso2_z << dlmtr << mouthspeak <<"\n";
         num_keyframes = num_keyframes + 1;
         myfile.close();
     }
@@ -96,27 +113,44 @@ void playback(int temp){
     light1 = light1_int[playback_frame_no];
     lid_angle = lid_angle_int[playback_frame_no];
     dancer_pos = dancer_pos_int[playback_frame_no];
+    rotate_x = rotate_x_int[playback_frame_no];
+    rotate_y = rotate_y_int[playback_frame_no];
+    rotate_z = rotate_z_int[playback_frame_no];
     rot_neck_x =rot_neck_x_int[playback_frame_no];
     rot_neck_y = rot_neck_y_int[playback_frame_no];
+    rot_neck_z = rot_neck_z_int[playback_frame_no];
     rot_right_shoulder_x = rot_right_shoulder_x_int[playback_frame_no];
+    rot_right_shoulder_y = rot_right_shoulder_y_int[playback_frame_no];
     rot_right_shoulder_z = rot_right_shoulder_z_int[playback_frame_no];
     rot_left_shoulder_x = rot_left_shoulder_x_int[playback_frame_no];
+    rot_left_shoulder_y = rot_left_shoulder_y_int[playback_frame_no];
     rot_left_shoulder_z = rot_left_shoulder_z_int[playback_frame_no];
     rot_right_elbow = rot_right_elbow_int[playback_frame_no];
     rot_left_elbow =rot_left_elbow_int[playback_frame_no];
-    rot_right_wrist = rot_right_wrist_int[playback_frame_no];
-    rot_left_wrist = rot_left_wrist_int[playback_frame_no];
+    rot_right_wrist_x = rot_right_wrist_x_int[playback_frame_no];
+    rot_left_wrist_x = rot_left_wrist_x_int[playback_frame_no];
+    rot_right_wrist_y = rot_right_wrist_y_int[playback_frame_no];
+    rot_left_wrist_y = rot_left_wrist_y_int[playback_frame_no];
+    rot_right_wrist_z = rot_right_wrist_z_int[playback_frame_no];
+    rot_left_wrist_z = rot_left_wrist_z_int[playback_frame_no];
     rot_right_hip_x = rot_right_hip_x_int[playback_frame_no];
+    rot_right_hip_y = rot_right_hip_y_int[playback_frame_no];
     rot_right_hip_z = rot_right_hip_z_int[playback_frame_no];
     rot_left_hip_x = rot_left_hip_x_int[playback_frame_no];
+    rot_left_hip_y = rot_left_hip_y_int[playback_frame_no];
     rot_left_hip_z = rot_left_hip_z_int[playback_frame_no];
     rot_right_knee = rot_right_knee_int[playback_frame_no];
     rot_left_knee = rot_left_knee_int[playback_frame_no];
-    rot_right_ankle = rot_right_ankle_int[playback_frame_no];
-    rot_left_ankle = rot_left_ankle_int[playback_frame_no];
+    rot_right_ankle_x = rot_right_ankle_x_int[playback_frame_no];
+    rot_left_ankle_x = rot_left_ankle_x_int[playback_frame_no];
+    rot_right_ankle_y = rot_right_ankle_y_int[playback_frame_no];
+    rot_left_ankle_y = rot_left_ankle_y_int[playback_frame_no];
+    rot_right_ankle_z = rot_right_ankle_z_int[playback_frame_no];
+    rot_left_ankle_z = rot_left_ankle_z_int[playback_frame_no];
     rot_torso2_x = rot_torso2_x_int[playback_frame_no];
     rot_torso2_y = rot_torso2_y_int[playback_frame_no];
-    mouth_speak = mouthspeak_int[playback_frame_no];
+    rot_torso2_z = rot_torso2_z_int[playback_frame_no];
+    mouthspeak = mouthspeak_int[playback_frame_no];
 
     cerr << "Playback Frame no : " <<  playback_frame_no<<endl;
     glutPostRedisplay();
@@ -177,26 +211,43 @@ int read_keyframes_and_playback() {
     bool light1_kf[num_keyframes];
     int lid_angle_kf[num_keyframes];
     float dancer_pos_kf[num_keyframes];
+    int rotate_x_kf[num_keyframes];
+    int rotate_y_kf[num_keyframes];
+    int rotate_z_kf[num_keyframes];
     int rot_neck_x_kf[num_keyframes];
     int rot_neck_y_kf[num_keyframes];
+    int rot_neck_z_kf[num_keyframes];
     int rot_right_shoulder_x_kf[num_keyframes];
+    int rot_right_shoulder_y_kf[num_keyframes];
     int rot_right_shoulder_z_kf[num_keyframes];
     int rot_left_shoulder_x_kf[num_keyframes];
+    int rot_left_shoulder_y_kf[num_keyframes];
     int rot_left_shoulder_z_kf[num_keyframes];
     int rot_right_elbow_kf[num_keyframes];
     int rot_left_elbow_kf[num_keyframes];
-    int rot_right_wrist_kf[num_keyframes];
-    int rot_left_wrist_kf[num_keyframes];
+    int rot_right_wrist_x_kf[num_keyframes];
+    int rot_right_wrist_y_kf[num_keyframes];
+    int rot_right_wrist_z_kf[num_keyframes];
+    int rot_left_wrist_x_kf[num_keyframes];
+    int rot_left_wrist_y_kf[num_keyframes];
+    int rot_left_wrist_z_kf[num_keyframes];
     int rot_right_hip_x_kf[num_keyframes];
+    int rot_right_hip_y_kf[num_keyframes];
     int rot_right_hip_z_kf[num_keyframes];
     int rot_left_hip_x_kf[num_keyframes];
+    int rot_left_hip_y_kf[num_keyframes];
     int rot_left_hip_z_kf[num_keyframes];
     int rot_right_knee_kf[num_keyframes];
     int rot_left_knee_kf[num_keyframes];
-    int rot_right_ankle_kf[num_keyframes];
-    int rot_left_ankle_kf[num_keyframes];
+    int rot_right_ankle_x_kf[num_keyframes];
+    int rot_right_ankle_y_kf[num_keyframes];
+    int rot_right_ankle_z_kf[num_keyframes];
+    int rot_left_ankle_x_kf[num_keyframes];
+    int rot_left_ankle_y_kf[num_keyframes];
+    int rot_left_ankle_z_kf[num_keyframes];
     int rot_torso2_x_kf[num_keyframes];
     int rot_torso2_y_kf[num_keyframes];
+    int rot_torso2_z_kf[num_keyframes];
     float mouthspeak_kf[num_keyframes];
 
     for(int p=0; p<num_kf_parameters; p++){
@@ -253,105 +304,190 @@ int read_keyframes_and_playback() {
         }
         else if (p==10){
             for(int q=0; q<num_keyframes; q++){
-                rot_neck_x_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rotate_x_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==11){
             for(int q=0; q<num_keyframes; q++){
-                rot_neck_y_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rotate_y_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==12){
             for(int q=0; q<num_keyframes; q++){
-                rot_right_shoulder_x_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rotate_z_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==13){
             for(int q=0; q<num_keyframes; q++){
-                rot_right_shoulder_z_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rot_neck_x_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==14){
             for(int q=0; q<num_keyframes; q++){
-                rot_left_shoulder_x_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rot_neck_y_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==15){
             for(int q=0; q<num_keyframes; q++){
-                rot_left_shoulder_z_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rot_neck_z_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==16){
             for(int q=0; q<num_keyframes; q++){
-                rot_right_elbow_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rot_right_shoulder_x_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==17){
             for(int q=0; q<num_keyframes; q++){
-                rot_left_elbow_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rot_right_shoulder_y_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==18){
             for(int q=0; q<num_keyframes; q++){
-                rot_right_wrist_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rot_right_shoulder_z_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==19){
             for(int q=0; q<num_keyframes; q++){
-                rot_left_wrist_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rot_left_shoulder_x_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==20){
             for(int q=0; q<num_keyframes; q++){
-                rot_right_hip_x_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rot_left_shoulder_y_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==21){
             for(int q=0; q<num_keyframes; q++){
-                rot_right_hip_z_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rot_left_shoulder_z_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==22){
             for(int q=0; q<num_keyframes; q++){
-                rot_left_hip_x_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rot_right_elbow_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==23){
             for(int q=0; q<num_keyframes; q++){
-                rot_left_hip_z_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rot_left_elbow_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==24){
             for(int q=0; q<num_keyframes; q++){
-                rot_right_knee_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rot_right_wrist_x_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==25){
             for(int q=0; q<num_keyframes; q++){
-                rot_left_knee_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rot_right_wrist_y_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==26){
             for(int q=0; q<num_keyframes; q++){
-                rot_right_ankle_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rot_right_wrist_z_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==27){
             for(int q=0; q<num_keyframes; q++){
-                rot_left_ankle_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rot_left_wrist_x_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==28){
             for(int q=0; q<num_keyframes; q++){
-                rot_torso2_x_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rot_left_wrist_y_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==29){
             for(int q=0; q<num_keyframes; q++){
-                rot_torso2_y_kf[q] = atoi(kf_parameters[q][p].c_str());
+                rot_left_wrist_z_kf[q] = atoi(kf_parameters[q][p].c_str());
             }
         }
         else if (p==30){
+            for(int q=0; q<num_keyframes; q++){
+                rot_right_hip_x_kf[q] = atoi(kf_parameters[q][p].c_str());
+            }
+        }
+        else if (p==31){
+            for(int q=0; q<num_keyframes; q++){
+                rot_right_hip_y_kf[q] = atoi(kf_parameters[q][p].c_str());
+            }
+        }
+        else if (p==32){
+            for(int q=0; q<num_keyframes; q++){
+                rot_right_hip_z_kf[q] = atoi(kf_parameters[q][p].c_str());
+            }
+        }
+        else if (p==33){
+            for(int q=0; q<num_keyframes; q++){
+                rot_left_hip_x_kf[q] = atoi(kf_parameters[q][p].c_str());
+            }
+        }
+        else if (p==34){
+            for(int q=0; q<num_keyframes; q++){
+                rot_left_hip_y_kf[q] = atoi(kf_parameters[q][p].c_str());
+            }
+        }
+        else if (p==35){
+            for(int q=0; q<num_keyframes; q++){
+                rot_left_hip_z_kf[q] = atoi(kf_parameters[q][p].c_str());
+            }
+        }
+        else if (p==36){
+            for(int q=0; q<num_keyframes; q++){
+                rot_right_knee_kf[q] = atoi(kf_parameters[q][p].c_str());
+            }
+        }
+        else if (p==37){
+            for(int q=0; q<num_keyframes; q++){
+                rot_left_knee_kf[q] = atoi(kf_parameters[q][p].c_str());
+            }
+        }
+        else if (p==38){
+            for(int q=0; q<num_keyframes; q++){
+                rot_right_ankle_x_kf[q] = atoi(kf_parameters[q][p].c_str());
+            }
+        }
+        else if (p==39){
+            for(int q=0; q<num_keyframes; q++){
+                rot_right_ankle_y_kf[q] = atoi(kf_parameters[q][p].c_str());
+            }
+        }
+        else if (p==40){
+            for(int q=0; q<num_keyframes; q++){
+                rot_right_ankle_z_kf[q] = atoi(kf_parameters[q][p].c_str());
+            }
+        }
+        else if (p==41){
+            for(int q=0; q<num_keyframes; q++){
+                rot_left_ankle_x_kf[q] = atoi(kf_parameters[q][p].c_str());
+            }
+        }
+        else if (p==42){
+            for(int q=0; q<num_keyframes; q++){
+                rot_left_ankle_y_kf[q] = atoi(kf_parameters[q][p].c_str());
+            }
+        }
+        else if (p==43){
+            for(int q=0; q<num_keyframes; q++){
+                rot_left_ankle_z_kf[q] = atoi(kf_parameters[q][p].c_str());
+            }
+        }
+        else if (p==44){
+            for(int q=0; q<num_keyframes; q++){
+                rot_torso2_x_kf[q] = atoi(kf_parameters[q][p].c_str());
+            }
+        }
+        else if (p==45){
+            for(int q=0; q<num_keyframes; q++){
+                rot_torso2_y_kf[q] = atoi(kf_parameters[q][p].c_str());
+            }
+        }
+        else if (p==46){
+            for(int q=0; q<num_keyframes; q++){
+                rot_torso2_z_kf[q] = atoi(kf_parameters[q][p].c_str());
+            }
+        }
+        else if (p==47){
             for(int q=0; q<num_keyframes; q++){
                 mouthspeak_kf[q] = atof(kf_parameters[q][p].c_str());
             }
@@ -450,6 +586,36 @@ int read_keyframes_and_playback() {
 
 
     for(int g=0; g<num_keyframes-1;g++){
+        float dx = (rotate_x_kf[g+1] - rotate_x_kf[g]) / between_frames;
+        for(int h=0; h<=between_frames; h++){
+            float int_val = rotate_x_kf[g] + h*dx;
+            rotate_x_int[g*between_frames + h] = (int)int_val;
+        }
+        rotate_x_int[num_interpolated-1] = rotate_x_kf[num_keyframes-1];
+    }
+
+
+    for(int g=0; g<num_keyframes-1;g++){
+        float dx = (rotate_y_kf[g+1] - rotate_y_kf[g]) / between_frames;
+        for(int h=0; h<=between_frames; h++){
+            float int_val = rotate_y_kf[g] + h*dx;
+            rotate_y_int[g*between_frames + h] = (int)int_val;
+        }
+        rotate_y_int[num_interpolated-1] = rotate_y_kf[num_keyframes-1];
+    }
+
+
+    for(int g=0; g<num_keyframes-1;g++){
+        float dx = (rotate_z_kf[g+1] - rotate_z_kf[g]) / between_frames;
+        for(int h=0; h<=between_frames; h++){
+            float int_val = rotate_z_kf[g] + h*dx;
+            rotate_z_int[g*between_frames + h] = (int)int_val;
+        }
+        rotate_z_int[num_interpolated-1] = rotate_z_kf[num_keyframes-1];
+    }
+
+
+    for(int g=0; g<num_keyframes-1;g++){
         float dx = (rot_neck_x_kf[g+1] - rot_neck_x_kf[g]) / between_frames;
         for(int h=0; h<=between_frames; h++){
             float int_val = rot_neck_x_kf[g] + h*dx;
@@ -470,12 +636,30 @@ int read_keyframes_and_playback() {
 
 
     for(int g=0; g<num_keyframes-1;g++){
+        float dx = (rot_neck_z_kf[g+1] - rot_neck_z_kf[g]) / between_frames;
+        for(int h=0; h<=between_frames; h++){
+            float int_val = rot_neck_z_kf[g] + h*dx;
+            rot_neck_z_int[g*between_frames + h] = (int)int_val;
+        }
+        rot_neck_z_int[num_interpolated-1] = rot_neck_z_kf[num_keyframes-1];
+    }
+
+    for(int g=0; g<num_keyframes-1;g++){
         float dx = (rot_right_shoulder_x_kf[g+1] - rot_right_shoulder_x_kf[g]) / between_frames;
         for(int h=0; h<=between_frames; h++){
             float int_val = rot_right_shoulder_x_kf[g] + h*dx;
             rot_right_shoulder_x_int[g*between_frames + h] = (int)int_val;
         }
         rot_right_shoulder_x_int[num_interpolated-1] = rot_right_shoulder_x_kf[num_keyframes-1];
+    }
+
+    for(int g=0; g<num_keyframes-1;g++){
+        float dx = (rot_right_shoulder_y_kf[g+1] - rot_right_shoulder_y_kf[g]) / between_frames;
+        for(int h=0; h<=between_frames; h++){
+            float int_val = rot_right_shoulder_y_kf[g] + h*dx;
+            rot_right_shoulder_y_int[g*between_frames + h] = (int)int_val;
+        }
+        rot_right_shoulder_y_int[num_interpolated-1] = rot_right_shoulder_y_kf[num_keyframes-1];
     }
 
 
@@ -498,6 +682,14 @@ int read_keyframes_and_playback() {
         rot_left_shoulder_x_int[num_interpolated-1] = rot_left_shoulder_x_kf[num_keyframes-1];
     }
 
+    for(int g=0; g<num_keyframes-1;g++){
+        float dx = (rot_left_shoulder_y_kf[g+1] - rot_left_shoulder_y_kf[g]) / between_frames;
+        for(int h=0; h<=between_frames; h++){
+            float int_val = rot_left_shoulder_y_kf[g] + h*dx;
+            rot_left_shoulder_y_int[g*between_frames + h] = (int)int_val;
+        }
+        rot_left_shoulder_y_int[num_interpolated-1] = rot_left_shoulder_y_kf[num_keyframes-1];
+    }
 
     for(int g=0; g<num_keyframes-1;g++){
         float dx = (rot_left_shoulder_z_kf[g+1] - rot_left_shoulder_z_kf[g]) / between_frames;
@@ -538,6 +730,17 @@ int read_keyframes_and_playback() {
     }
 
 
+
+    for(int g=0; g<num_keyframes-1;g++){
+        float dx = (rot_right_hip_y_kf[g+1] - rot_right_hip_y_kf[g]) / between_frames;
+        for(int h=0; h<=between_frames; h++){
+            float int_val = rot_right_hip_y_kf[g] + h*dx;
+            rot_right_hip_y_int[g*between_frames + h] = (int)int_val;
+        }
+        rot_right_hip_y_int[num_interpolated-1] = rot_right_hip_y_kf[num_keyframes-1];
+    }
+
+
     for(int g=0; g<num_keyframes-1;g++){
         float dx = (rot_right_hip_z_kf[g+1] - rot_right_hip_z_kf[g]) / between_frames;
         for(int h=0; h<=between_frames; h++){
@@ -557,6 +760,14 @@ int read_keyframes_and_playback() {
         rot_left_hip_x_int[num_interpolated-1] = rot_left_hip_x_kf[num_keyframes-1];
     }
 
+    for(int g=0; g<num_keyframes-1;g++){
+        float dx = (rot_left_hip_y_kf[g+1] - rot_left_hip_y_kf[g]) / between_frames;
+        for(int h=0; h<=between_frames; h++){
+            float int_val = rot_left_hip_y_kf[g] + h*dx;
+            rot_left_hip_y_int[g*between_frames + h] = (int)int_val;
+        }
+        rot_left_hip_y_int[num_interpolated-1] = rot_left_hip_y_kf[num_keyframes-1];
+    }
 
     for(int g=0; g<num_keyframes-1;g++){
         float dx = (rot_left_hip_z_kf[g+1] - rot_left_hip_z_kf[g]) / between_frames;
@@ -589,24 +800,58 @@ int read_keyframes_and_playback() {
 
 
     for(int g=0; g<num_keyframes-1;g++){
-        float dx = (rot_right_ankle_kf[g+1] - rot_right_ankle_kf[g]) / between_frames;
+        float dx = (rot_right_ankle_x_kf[g+1] - rot_right_ankle_x_kf[g]) / between_frames;
         for(int h=0; h<=between_frames; h++){
-            float int_val = rot_right_ankle_kf[g] + h*dx;
-            rot_right_ankle_int[g*between_frames + h] = (int)int_val;
+            float int_val = rot_right_ankle_x_kf[g] + h*dx;
+            rot_right_ankle_x_int[g*between_frames + h] = (int)int_val;
         }
-        rot_right_ankle_int[num_interpolated-1] = rot_right_ankle_kf[num_keyframes-1];
+        rot_right_ankle_x_int[num_interpolated-1] = rot_right_ankle_x_kf[num_keyframes-1];
     }
-
 
     for(int g=0; g<num_keyframes-1;g++){
-        float dx = (rot_left_ankle_kf[g+1] - rot_left_ankle_kf[g]) / between_frames;
+        float dx = (rot_right_ankle_y_kf[g+1] - rot_right_ankle_y_kf[g]) / between_frames;
         for(int h=0; h<=between_frames; h++){
-            float int_val = rot_left_ankle_kf[g] + h*dx;
-            rot_left_ankle_int[g*between_frames + h] = (int)int_val;
+            float int_val = rot_right_ankle_y_kf[g] + h*dx;
+            rot_right_ankle_y_int[g*between_frames + h] = (int)int_val;
         }
-        rot_left_ankle_int[num_interpolated-1] = rot_left_ankle_kf[num_keyframes-1];
+        rot_right_ankle_y_int[num_interpolated-1] = rot_right_ankle_y_kf[num_keyframes-1];
     }
 
+    for(int g=0; g<num_keyframes-1;g++){
+        float dx = (rot_right_ankle_z_kf[g+1] - rot_right_ankle_z_kf[g]) / between_frames;
+        for(int h=0; h<=between_frames; h++){
+            float int_val = rot_right_ankle_z_kf[g] + h*dx;
+            rot_right_ankle_z_int[g*between_frames + h] = (int)int_val;
+        }
+        rot_right_ankle_z_int[num_interpolated-1] = rot_right_ankle_z_kf[num_keyframes-1];
+    }
+
+    for(int g=0; g<num_keyframes-1;g++){
+        float dx = (rot_left_ankle_x_kf[g+1] - rot_left_ankle_x_kf[g]) / between_frames;
+        for(int h=0; h<=between_frames; h++){
+            float int_val = rot_left_ankle_x_kf[g] + h*dx;
+            rot_left_ankle_x_int[g*between_frames + h] = (int)int_val;
+        }
+        rot_left_ankle_x_int[num_interpolated-1] = rot_left_ankle_x_kf[num_keyframes-1];
+    }
+
+    for(int g=0; g<num_keyframes-1;g++){
+        float dx = (rot_left_ankle_y_kf[g+1] - rot_left_ankle_y_kf[g]) / between_frames;
+        for(int h=0; h<=between_frames; h++){
+            float int_val = rot_left_ankle_y_kf[g] + h*dx;
+            rot_left_ankle_y_int[g*between_frames + h] = (int)int_val;
+        }
+        rot_left_ankle_y_int[num_interpolated-1] = rot_left_ankle_y_kf[num_keyframes-1];
+    }
+
+    for(int g=0; g<num_keyframes-1;g++){
+        float dx = (rot_left_ankle_z_kf[g+1] - rot_left_ankle_z_kf[g]) / between_frames;
+        for(int h=0; h<=between_frames; h++){
+            float int_val = rot_left_ankle_z_kf[g] + h*dx;
+            rot_left_ankle_z_int[g*between_frames + h] = (int)int_val;
+        }
+        rot_left_ankle_z_int[num_interpolated-1] = rot_left_ankle_z_kf[num_keyframes-1];
+    }
 
     for(int g=0; g<num_keyframes-1;g++){
         float dx = (rot_torso2_x_kf[g+1] - rot_torso2_x_kf[g]) / between_frames;
@@ -625,6 +870,15 @@ int read_keyframes_and_playback() {
             rot_torso2_y_int[g*between_frames + h] = (int)int_val;
         }
         rot_torso2_y_int[num_interpolated-1] = rot_torso2_y_kf[num_keyframes-1];
+    }
+
+    for(int g=0; g<num_keyframes-1;g++){
+        float dx = (rot_torso2_z_kf[g+1] - rot_torso2_z_kf[g]) / between_frames;
+        for(int h=0; h<=between_frames; h++){
+            float int_val = rot_torso2_z_kf[g] + h*dx;
+            rot_torso2_z_int[g*between_frames + h] = (int)int_val;
+        }
+        rot_torso2_z_int[num_interpolated-1] = rot_torso2_z_kf[num_keyframes-1];
     }
 
 

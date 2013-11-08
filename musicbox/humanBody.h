@@ -38,32 +38,48 @@ extern int rot_right_elbow;
 
 extern int rot_left_shoulder_x; // _* denotes the direction of rotation/tilt and not the axis of rotation
 extern int rot_right_shoulder_x;
+extern int rot_right_shoulder_y;
+extern int rot_left_shoulder_y;
 extern int rot_left_shoulder_z;
 extern int rot_right_shoulder_z;
 
-extern int rot_right_wrist;
-extern int rot_left_wrist;
+extern int rot_right_wrist_x;
+extern int rot_right_wrist_y;
+extern int rot_right_wrist_z;
+extern int rot_left_wrist_x;
+extern int rot_left_wrist_y;
+extern int rot_left_wrist_z;
+
 
 extern int rot_left_hip_x;
 extern int rot_right_hip_x;
+extern int rot_left_hip_y;
+extern int rot_right_hip_y;
 extern int rot_left_hip_z;
 extern int rot_right_hip_z;
 
-extern float mouth_speak;
+extern float mouthspeak;
 
 extern int rot_neck_x;
 extern int rot_neck_y;
+extern int rot_neck_z;
 
 extern int rotate_x;
 extern int rotate_y;
+extern int rotate_z;
 
 extern int rot_right_knee;
 extern int rot_left_knee;
 
-extern int rot_left_ankle;
-extern int rot_right_ankle;
+extern int rot_left_ankle_x;
+extern int rot_right_ankle_x;
+extern int rot_left_ankle_y;
+extern int rot_right_ankle_y;
+extern int rot_left_ankle_z;
+extern int rot_right_ankle_z;
 
 extern int rot_torso2_x;
 extern int rot_torso2_y;
+extern int rot_torso2_z;
 
 #endif

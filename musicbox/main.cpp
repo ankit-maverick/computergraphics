@@ -22,38 +22,52 @@ using namespace std;
 
 /* GLOBAL VARIABLES */
 
-int WIN_HEIGHT = 512;
-int WIN_WIDTH = 512;
+int WIN_HEIGHT = 700;
+int WIN_WIDTH = 700;
 
 int rot_left_elbow;
 int rot_right_elbow;
 
 int rot_left_shoulder_x; // _* denotes the direction of rotation/tilt and not the axis of rotation
 int rot_right_shoulder_x;
+int rot_right_shoulder_y;
+int rot_left_shoulder_y;
 int rot_left_shoulder_z;
 int rot_right_shoulder_z;
 
-int rot_right_wrist;
-int rot_left_wrist;
+int rot_right_wrist_x;
+int rot_left_wrist_x;
+int rot_right_wrist_y;
+int rot_left_wrist_y;
+int rot_right_wrist_z;
+int rot_left_wrist_z;
 
 int rot_left_hip_x;
 int rot_right_hip_x;
+int rot_left_hip_y;
+int rot_right_hip_y;
 int rot_left_hip_z;
 int rot_right_hip_z;
 
-float mouth_speak = 0.005;
+float mouthspeak = 0.005;
 
 int rot_neck_x;
 int rot_neck_y;
+int rot_neck_z;
 
 int rot_right_knee;
 int rot_left_knee;
 
-int rot_left_ankle;
-int rot_right_ankle;
+int rot_left_ankle_x;
+int rot_right_ankle_x;
+int rot_left_ankle_y;
+int rot_right_ankle_y;
+int rot_left_ankle_z;
+int rot_right_ankle_z;
 
 int rot_torso2_x;
 int rot_torso2_y;
+int rot_torso2_z;
 
 
 GLuint skin_tex;
@@ -61,6 +75,7 @@ GLuint hair_tex;
 
 int rotate_x = 0;
 int rotate_y = 0;
+int rotate_z = 0;
 
 bool light0;
 bool light1;
@@ -87,39 +102,6 @@ GLuint rod1_tex;
 GLuint rod2_tex;
 GLuint lamp_base_tex;
 
-//BezierCurve curve = BezierCurve(0.04);
-
-/*
-GLuint LoadTexture(const char* filepath) {
-  GLuint texture; 
-  unsigned char header[54];
-  unsigned int position = 54;
-  unsigned int width;
-  unsigned int height;
-  unsigned int imagesize; 
-  unsigned char* pixel;
-
-  FILE * bmpfile;
-  bmpfile  = fopen(filepath, "rb"); 
-  if(!bmpfile) {printf("Image not found\n"); return 0;}
-  fread(header,1,54,bmpfile);
-  width = *(int*)&(header[18]);
-  height = *(int*)&(header[22]);
-  imagesize = width*height*3;
-
-  pixel = new unsigned char[imagesize];
-  fread(pixel,1,imagesize,bmpfile);
-  fclose(bmpfile);
-
-  glGenTextures(1, &texture);
-  glBindTexture(GL_TEXTURE_2D, texture);
-  
-  glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, pixel);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  return texture;
-}
-*/
 
 float eye_x = 0.0;
 float eye_y = 0.0;
@@ -127,7 +109,7 @@ float eye_z = 5.0;
 
 float center_x = 0.0;
 float center_y = 0.0;
-float center_z = 0.0;
+float center_z = 0.5;
 
 float r = 5;
 float theta = 0;
@@ -135,8 +117,8 @@ float phi = 0;
 float theta1,phi1;
 
 
-// The following R, theta, phi 3d navigation model adapted from
-// Parthe - Jinit's group
+// The following R, theta, phi 3d navigation model adapted after
+// discussing with Parthe - Jinit's group
 void updateXYZ()
 {
     theta1 = pi*( 90 + theta)/180;
@@ -153,6 +135,7 @@ void updateLookAt()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluLookAt(eye_x,eye_y,eye_z,center_x,center_y,center_z,0,1,0);
+    cerr << "Center co-ordinates :  " << center_x << " " << center_y << " " << center_z << endl;
 }
 
 
@@ -196,6 +179,49 @@ void keyboardspecial(int a, int b, int c)
             updateXYZ();
 
             break;
+
+        case GLUT_KEY_F7:
+            if (center_x > -10)
+                center_x = center_x - 0.1;
+            updateXYZ();
+
+            break;
+
+        case GLUT_KEY_F8:
+            if (center_x < 10)
+                center_x = center_x + 0.1;
+            updateXYZ();
+
+            break;
+
+        case GLUT_KEY_F9:
+            if (center_y > -10)
+                center_y = center_y - 0.1;
+            updateXYZ();
+
+            break;
+
+        case GLUT_KEY_F10:
+            if (center_y < 10)
+                center_y = center_y + 0.1;
+            updateXYZ();
+
+            break;
+
+        case GLUT_KEY_F11:
+            if (center_z > -10)
+                center_z = center_z - 0.1;
+            updateXYZ();
+
+            break;
+
+        case GLUT_KEY_F12:
+            if (center_z < 10)
+                center_z = center_z + 0.1;
+            updateXYZ();
+
+            break;
+
         default: exit(0);break;
     }
 
@@ -211,13 +237,13 @@ void display(void){
     glLoadIdentity();
     gluPerspective(45.0, //Field of view
                    1.0, //Aspect ratio
-                    0.3, // Z near
-                    1000.0);// Z far
+                   0.3, // Z near
+                   1000.0);// Z far
 
     updateLookAt();
 
     //Configuring GL_LIGHT1 i.e. Table Lamp
-    GLfloat light_ambient1[] = {0.7, 0.7, 0.7, 1.0};
+    GLfloat light_ambient1[] = {1.0, 0.7, 0.0, 1.0};
     GLfloat light_diffuse1[] = {1.0, 1.0, 1.0, 1.0};
     GLfloat light_specular1[] = {0.0, 1.0, 0.0, 1.0};
     GLfloat light_position1[] = {-0.2, 0.35, 0.60, 1.0};
@@ -314,15 +340,20 @@ void display(void){
 
     // Dancer
     glPushMatrix();
-        glTranslatef(0.1, 0.10, 0.60);
+        glTranslatef(0.0, dancer_pos, 0.0);
+        glTranslatef(0.1, -0.1, 0.60);
+        glRotatef(rotate_x, 1.0, 0.0, 0.0);
+        glRotatef(rotate_y, 0.0, 1.0, 0.0);
+        glRotatef(rotate_z, 0.0, 0.0, 1.0);
         glScalef(0.08, 0.08, 0.08);
         drawBody(skin_tex, hair_tex);
     glPopMatrix();
 
     // MusicBox
     glPushMatrix();
-        glTranslatef(0.1, -0.163, 0.62);
-        glScalef(0.1, 0.1, 0.1);
+        glTranslatef(0.1, -0.163, 0.58);
+        glRotatef(180, 0.0, 1.0, 0.0);
+        glScalef(0.08, 0.08, 0.08);
         drawBox(box_tex);
     glPopMatrix();
 
@@ -421,28 +452,6 @@ void init(void){
 */       
 
 
-/*
-    glEnable(GL_LIGHTING);
-    //glEnable(GL_COLOR_MATERIAL);
-    //glShadeModel(GL_FLAT);
-    //glEnable()
-    glEnable(GL_LIGHT0);
-
-    // Create light components
-    GLfloat ambientLight[] = { 0.9f, 0.9f, 0.9f, 1.0f };
-    GLfloat diffuseLight[] = { 0.8f, 0.8f, 0.8, 1.0f };
-    GLfloat specularLight[] = { 0.5f, 0.5f, 0.5f, 1.0f };
-    GLfloat position[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-
-    // Assign created components to GL_LIGHT0
-    glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
-    glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight);
-    glLightfv(GL_LIGHT0, GL_POSITION, position);
-    
-    //glDisable(GL_LIGHT0);
-    //updateLookAt();
-*/
 }
 
 
