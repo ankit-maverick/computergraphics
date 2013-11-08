@@ -122,6 +122,10 @@ void flythru(int temp){
 	center_y = curve.sampledCurve[(curve.time_step+1)*3 + 1];
 	center_z = curve.sampledCurve[(curve.time_step+1)*3 + 2];
 
+	int step = 4;
+	if (curve.time_step % step == 0){
+		write_keyframe();
+	}
 	//gluLookAt(curve.sampledCurve[curve.time_step*3], curve.sampledCurve[curve.time_step*3 + 1],curve.sampledCurve[curve.time_step*3 + 2],	// eye position
 	//		  curve.sampledCurve[(curve.time_step+1)*3], curve.sampledCurve[(curve.time_step+1)*3 + 1],curve.sampledCurve[(curve.time_step+1)*3 + 2],	// center
 	//					0.0, 1.0, 0.0);	// up vector 
