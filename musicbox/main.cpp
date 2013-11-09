@@ -22,8 +22,8 @@ using namespace std;
 
 /* GLOBAL VARIABLES */
 
-int WIN_HEIGHT = 700;
-int WIN_WIDTH = 700;
+int WIN_HEIGHT = 600;
+int WIN_WIDTH = 600;
 
 int rot_left_elbow;
 int rot_right_elbow;
@@ -98,9 +98,11 @@ GLuint stool_seat_tex;
 GLuint pillow_tex;
 GLuint box_tex;
 GLuint window_tex;
-GLuint rod1_tex;
-GLuint rod2_tex;
+GLuint rod_tex;
+GLuint cyl_fan_tex;
 GLuint lamp_base_tex;
+GLuint jeans1_tex;
+GLuint shirt1_tex;
 
 
 float eye_x = 0.0;
@@ -109,7 +111,7 @@ float eye_z = 5.0;
 
 float center_x = 0.0;
 float center_y = 0.0;
-float center_z = 0.5;
+float center_z = 0.0;
 
 float r = 5;
 float theta = 0;
@@ -168,7 +170,7 @@ void keyboardspecial(int a, int b, int c)
             
             break;
         case GLUT_KEY_PAGE_UP: 
-            if (r >0.6)
+            if (r >0.1)
                 r = r - 0.2;
             updateXYZ();
             
@@ -222,6 +224,35 @@ void keyboardspecial(int a, int b, int c)
 
             break;
 
+        case GLUT_KEY_F1:
+            cerr << "Saved the current keyframe." << endl;
+            write_keyframe();
+            //updateXYZ();
+
+            break;
+
+        case GLUT_KEY_F2:
+            cerr << "Cleared keyframes.txt file." << endl;
+            clear_keyframes();
+            //updateXYZ();
+
+            break;
+
+        case GLUT_KEY_F3:
+            cerr << "Read keyframes.txt file." << endl;
+            read_keyframes_and_playback();
+
+            break;
+
+        case GLUT_KEY_F4:
+            curve.drawCurve();
+            break;
+
+        case GLUT_KEY_F5:
+            cerr << "Starting Camera Flythrough " << endl;
+            flythru(0);
+            break;
+
         default: exit(0);break;
     }
 
@@ -237,7 +268,7 @@ void display(void){
     glLoadIdentity();
     gluPerspective(45.0, //Field of view
                    1.0, //Aspect ratio
-                   0.3, // Z near
+                   0.2, // Z near
                    1000.0);// Z far
 
     updateLookAt();
@@ -274,7 +305,7 @@ void display(void){
         glTranslatef(-0.2, -0.15, 0.60);
         glRotatef(180, 0.0, 1.0, 0.0);
         glScalef(0.7, 0.7, 0.7);
-        draw_table_lamp(rod1_tex, rod2_tex, lamp_base_tex);
+        draw_table_lamp(rod_tex, cyl_fan_tex);
     glPopMatrix();
 
     if (light1 == true){
@@ -334,7 +365,7 @@ void display(void){
 
     // Stool
     glPushMatrix();
-        glTranslatef(-0.2, -0.46, 0.30);
+        glTranslatef(-0.0, -0.46, 0.40);
         draw_stool(stool_bottom_tex, stool_seat_tex);
     glPopMatrix();
 
@@ -346,7 +377,7 @@ void display(void){
         glRotatef(rotate_y, 0.0, 1.0, 0.0);
         glRotatef(rotate_z, 0.0, 0.0, 1.0);
         glScalef(0.08, 0.08, 0.08);
-        drawBody(skin_tex, hair_tex);
+        drawBody(skin_tex, hair_tex, jeans1_tex, shirt1_tex);
     glPopMatrix();
 
     // MusicBox
@@ -396,9 +427,10 @@ void init(void){
     door_tex = LoadTexture("tex/door.bmp");
     floor_tex = LoadTexture("tex/floor3.bmp");
     wall_tex = LoadTexture("tex/metal2.bmp");
+    //wall_tex = LoadTexture("tex/wall9.bmp");
     ceiling_tex = LoadTexture("tex/walls2.bmp");
     portrait_frame_tex = LoadTexture("tex/wood.bmp");
-    portrait_pic_tex = LoadTexture("tex/vangogh.bmp");
+    portrait_pic_tex = LoadTexture("tex/mog.bmp");
     wall_mounted_lamp_base_tex = LoadTexture("tex/sunnymossy_wall.bmp");
     bed_side_tex = LoadTexture("tex/wood.bmp");
     bed_mattress_tex = LoadTexture("tex/mattress1.bmp");
@@ -409,11 +441,15 @@ void init(void){
     hair_tex = LoadTexture("tex/hair.bmp");
     box_tex = LoadTexture("tex/wood3.bmp");
     window_tex = LoadTexture("tex/beachview.bmp");
-    rod1_tex = LoadTexture("tex/black.bmp");
-    rod2_tex = LoadTexture("tex/black.bmp");
+    rod_tex = LoadTexture("tex/black.bmp");
+    //rod2_tex = LoadTexture("tex/black.bmp");
     lamp_base_tex = LoadTexture("tex/brown.bmp");
+    cyl_fan_tex = LoadTexture("tex/orange.bmp");
+    jeans1_tex = LoadTexture("tex/jeans2.bmp");
+    shirt1_tex = LoadTexture("tex/shirt3.bmp");
 
 
+    //glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
@@ -451,7 +487,24 @@ void init(void){
     glLightf(GL_LIGHT1,GL_SPOT_CUTOFF, 60);
 */       
 
+/*
+GLfloat no_mat[] = { 0.0, 0.0, 0.0, 1.0 };
+GLfloat mat_ambient[] = { 0.7, 0.7, 0.7, 1.0 };
+GLfloat low_ambient[] = { 0.1, 0.1, 0.1, 1.0 };
+GLfloat mat_ambient_color[] = { 0.8, 0.8, 0.2, 1.0 };
+GLfloat mat_diffuse[] = { 0.1, 0.5, 0.8, 1.0 };
+GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+GLfloat no_shininess[] = { 0.0 };
+GLfloat low_shininess[] = { 5.0 };
+GLfloat high_shininess[] = { 100.0 };
+GLfloat mat_emission[] = {0.3, 0.2, 0.2, 0.0};
 
+    glMaterialfv(GL_FRONT, GL_AMBIENT, no_mat);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
+    glMaterialfv(GL_FRONT, GL_SHININESS, no_shininess);
+    glMaterialfv(GL_FRONT, GL_EMISSION, mat_emission);
+*/
 }
 
 

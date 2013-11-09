@@ -18,7 +18,7 @@ void reshapeHandler( int w, int h );
 void keyHandler(unsigned char key, int x, int y);
 
 void drawBox(GLuint);
-void drawBody(GLuint, GLuint);
+void drawBody(GLuint, GLuint, GLuint, GLuint);
 
 void updateLookat();
 GLuint LoadTexture(const char* filepath);

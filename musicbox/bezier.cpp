@@ -66,8 +66,6 @@ int Bezier::sampleCurve(){
 	int numSamples = (1/sample_dist);
 	sampledCurve = new double[numSamples*3];
 	
-	// Debugging : Print Control Points co-ordinates
-	//for (int j=0)
 
 	//Intermediate samples
 	for(float t=sample_dist; t<1; t+=sample_dist){
@@ -109,12 +107,6 @@ void Bezier::drawCurve(){
 	
 	
 void flythru(int temp){
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();
-	//gluPerspective(45.0, //Field of view
-	//								1.0, //Aspect ratio
-	//								1.0, // Z near
-	//								1000.0);// Z far
 	eye_x = curve.sampledCurve[curve.time_step*3];
 	eye_y = curve.sampledCurve[curve.time_step*3+1];
 	eye_z = curve.sampledCurve[curve.time_step*3+2];
@@ -126,10 +118,6 @@ void flythru(int temp){
 	if (curve.time_step % step == 0){
 		write_keyframe();
 	}
-	//gluLookAt(curve.sampledCurve[curve.time_step*3], curve.sampledCurve[curve.time_step*3 + 1],curve.sampledCurve[curve.time_step*3 + 2],	// eye position
-	//		  curve.sampledCurve[(curve.time_step+1)*3], curve.sampledCurve[(curve.time_step+1)*3 + 1],curve.sampledCurve[(curve.time_step+1)*3 + 2],	// center
-	//					0.0, 1.0, 0.0);	// up vector 
-	//updateLookat();
 	glMatrixMode(GL_MODELVIEW);
 						
 	glutPostRedisplay();

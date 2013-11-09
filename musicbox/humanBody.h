@@ -8,9 +8,9 @@
 //----------------------------------------------------------------------
 
 
-GLuint dancer_torso1();
+GLuint dancer_torso1(GLuint);
 GLuint dancer_torso2();
-GLuint dancer_torso3();
+GLuint dancer_torso3(GLuint);
 GLuint dancer_neck();
 GLuint dancer_head(GLuint, GLuint);
 GLuint dancer_eye();
@@ -18,12 +18,12 @@ GLuint dancer_nose();
 GLuint dancer_mouth();
 GLuint dancer_greek_hat();
 GLuint dancer_shoulder();
-GLuint dancer_upper_arm();
+GLuint dancer_upper_arm(GLuint);
 GLuint dancer_lower_arm(GLuint);
 GLuint dancer_wrist();
 GLuint dancer_elbow();
 GLuint dancer_hip();
-GLuint dancer_thigh();
+GLuint dancer_thigh(GLuint);
 GLuint dancer_leg(GLuint);
 GLuint dancer_knee();
 GLuint dancer_ankle();

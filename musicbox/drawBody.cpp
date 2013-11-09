@@ -3,24 +3,24 @@
 
 
 
-void drawBody(GLuint skin, GLuint hair){
+void drawBody(GLuint skin, GLuint hair, GLuint jeans, GLuint shirt){
 	GLuint head = dancer_head(skin, hair);
     GLuint neck = dancer_neck();
     GLuint eye = dancer_eye();
     GLuint nose = dancer_nose();
     GLuint mouth = dancer_mouth();
     GLuint greek_hat = dancer_greek_hat();
-    GLuint torso1 = dancer_torso1();
+    GLuint torso1 = dancer_torso1(shirt);
     GLuint torso2 = dancer_torso2();
-    GLuint torso3 = dancer_torso3();
+    GLuint torso3 = dancer_torso3(shirt);
     GLuint hip = dancer_hip();
-    GLuint thigh = dancer_thigh();
+    GLuint thigh = dancer_thigh(jeans);
     GLuint knee = dancer_knee();
     GLuint ankle = dancer_ankle();
     GLuint leg = dancer_leg(skin);
     GLuint foot = dancer_foot();
     GLuint shoulder = dancer_shoulder();
-    GLuint upper_arm = dancer_upper_arm();
+    GLuint upper_arm = dancer_upper_arm(shirt);
     GLuint elbow = dancer_elbow();
     GLuint lower_arm = dancer_lower_arm(skin);
     GLuint wrist = dancer_wrist();

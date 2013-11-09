@@ -85,16 +85,30 @@ GLuint dancer_head(GLuint skin, GLuint hair) {
 }
 
 
-GLuint dancer_torso1() {
+GLuint dancer_torso1(GLuint shirt_tex) {
 	GLuint torso1 = glGenLists(1);
 	glNewList(torso1, GL_COMPILE);
 		GLUquadricObj *quadratic;
 		quadratic = gluNewQuadric();
+		glPushMatrix();
+			glEnable(GL_TEXTURE_2D);
+				glBindTexture(GL_TEXTURE_2D, shirt_tex);
+				glColor4f(1.0, 1.0, 1.0, 1.0); // reset color
 
-		glColor3f(1.0, 1.0, 0.0);
+				glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+				glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+		//glColor3f(1.0, 1.0, 0.0);
 		glScalef(1.0, 1.0, 0.5);
 		glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
+        gluQuadricTexture(quadratic, GL_TRUE);
 		gluCylinder(quadratic,0.2f,0.17f,0.30f,32,32);
+		glDisable(GL_TEXTURE_2D);
+		glPopMatrix();
 	glEndList();
 	return torso1;
 }
@@ -111,16 +125,28 @@ GLuint dancer_torso2() {
 }
 
 
-GLuint dancer_torso3() {
+GLuint dancer_torso3(GLuint shirt_tex) {
 	GLuint torso3 = glGenLists(1);
 	glNewList(torso3, GL_COMPILE);
 		GLUquadricObj *quadratic;
 		quadratic = gluNewQuadric();
+			glEnable(GL_TEXTURE_2D);
+				glBindTexture(GL_TEXTURE_2D, shirt_tex);
+				glColor4f(1.0, 1.0, 1.0, 1.0); // reset color
 
-		glColor3f(0.0, 1.0, 0.0);
+				glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+				glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+		//glColor3f(0.0, 1.0, 0.0);
 		glScalef(1.0, 1.0, 0.5);
 		glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
+		gluQuadricTexture(quadratic, GL_TRUE);
 		gluCylinder(quadratic,0.175f,0.195f,0.25f,32,32);
+		glDisable(GL_TEXTURE_2D);
 	glEndList();
 	return torso3;
 }
@@ -205,15 +231,27 @@ GLuint dancer_shoulder() {
 
 
 
-GLuint dancer_upper_arm() {
+GLuint dancer_upper_arm(GLuint shirt_tex) {
 	GLuint upper_arm = glGenLists(1);
 	glNewList(upper_arm, GL_COMPILE);
 		GLUquadricObj *quadratic;
 		quadratic = gluNewQuadric();
+		glEnable(GL_TEXTURE_2D);
+				glBindTexture(GL_TEXTURE_2D, shirt_tex);
+				//glColor4f(1.0, 1.0, 1.0, 1.0); // reset color
 
-		glColor3f(0.5, 0.0, 0.0);
+				glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+				glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+		//glColor3f(0.5, 0.0, 0.0);
 		glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
+		gluQuadricTexture(quadratic, GL_TRUE);
 		gluCylinder(quadratic,0.04f,0.04f,0.30f,20,20);
+		glDisable(GL_TEXTURE_2D);
 	glEndList();
 	return upper_arm;
 }
@@ -241,7 +279,7 @@ GLuint dancer_lower_arm(GLuint skin) {
 
 		glEnable(GL_TEXTURE_2D);
 		
-		gluQuadricNormals(quadratic, GLU_SMOOTH);
+		//gluQuadricNormals(quadratic, GLU_SMOOTH);
 		gluQuadricTexture(quadratic,GL_TRUE);
 
 		glBindTexture(GL_TEXTURE_2D, skin);
@@ -255,6 +293,7 @@ GLuint dancer_lower_arm(GLuint skin) {
 	   glColor3f(1.0, 1.0, 0.0);
       glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
       gluCylinder(quadratic,0.04f,0.03f,0.35f,20,20);
+      glDisable(GL_TEXTURE_2D);
 	glEndList();
 	return lower_arm;
 }
@@ -296,15 +335,28 @@ GLuint dancer_hip() {
 
 
 
-GLuint dancer_thigh() {
+GLuint dancer_thigh(GLuint jeans_tex) {
 	GLuint thigh = glGenLists(1);
 	glNewList(thigh, GL_COMPILE);
 		GLUquadricObj *quadratic;
 		quadratic = gluNewQuadric();
+		glEnable(GL_TEXTURE_2D);
+				glBindTexture(GL_TEXTURE_2D, jeans_tex);
+				//glColor4f(1.0, 1.0, 1.0, 1.0); // reset color
 
-		glColor3f(0.5, 0.5, 0.0);
+				glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+				glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+
+		//glColor3f(0.5, 0.5, 0.0);
         glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
+        gluQuadricTexture(quadratic, GL_TRUE);
         gluCylinder(quadratic,0.08f,0.06f,0.35f,20,20);
+        glDisable(GL_TEXTURE_2D);
 	glEndList();
 	return thigh;
 }
@@ -344,6 +396,7 @@ GLuint dancer_leg(GLuint skin) {
 
      glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
      gluCylinder(quadratic,0.06f,0.045f,0.40f,20,20);
+     glDisable(GL_TEXTURE_2D);
 	glEndList();
 	return leg;
 }

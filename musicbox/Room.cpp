@@ -1066,7 +1066,7 @@ GLuint bed_mattress(GLuint wood){
 
 
 
-GLuint table_lamp(GLuint rod1_tex, GLuint rod2_tex, GLuint cyl_fan){
+GLuint table_lamp(GLuint rod_tex, GLuint cyl_fan){
 	GLuint t_lamp = glGenLists(1);
 	glNewList(t_lamp, GL_COMPILE);
 		GLUquadricObj *quadratic;
@@ -1074,7 +1074,7 @@ GLuint table_lamp(GLuint rod1_tex, GLuint rod2_tex, GLuint cyl_fan){
 
 		// frame
 		glPushMatrix();
-			glColor3f(0.0, 1.0, 1.0);
+			glColor3f(0.0, 0.0, 0.0);
 			glScalef(1.0, 0.2, 1.0);
 			glutSolidCube(0.2);
 		glPopMatrix();
@@ -1085,7 +1085,7 @@ GLuint table_lamp(GLuint rod1_tex, GLuint rod2_tex, GLuint cyl_fan){
 			glPushMatrix();
 				glEnable(GL_TEXTURE_2D);
 
-				glBindTexture(GL_TEXTURE_2D, rod1_tex);
+				glBindTexture(GL_TEXTURE_2D, rod_tex);
 				glColor4f(1.0, 1.0, 1.0, 1.0); // reset color
 
 				glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -1104,7 +1104,7 @@ GLuint table_lamp(GLuint rod1_tex, GLuint rod2_tex, GLuint cyl_fan){
 
 			// Lower joint
 			glPushMatrix();
-				glColor3f(0.9, 0.9, 0.9);
+				glColor3f(0.3, 0.3, 0.3);
 				glTranslatef(0.0, 0.25, 0.0);
 				glutSolidSphere(0.025, 10, 10);
 				
@@ -1114,7 +1114,7 @@ GLuint table_lamp(GLuint rod1_tex, GLuint rod2_tex, GLuint cyl_fan){
 					//glScalef(0.5, 1.0, 0.5);
 					glEnable(GL_TEXTURE_2D);
 
-					glBindTexture(GL_TEXTURE_2D, rod2_tex);
+					glBindTexture(GL_TEXTURE_2D, rod_tex);
 					glColor4f(1.0, 1.0, 1.0, 1.0); // reset color
 
 					glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -1134,7 +1134,7 @@ GLuint table_lamp(GLuint rod1_tex, GLuint rod2_tex, GLuint cyl_fan){
 
 				// Upper Joint
 				glPushMatrix();
-					glColor3f(0.0, 0.3, 0.8);
+					glColor3f(0.3, 0.3, 0.3);
 					glTranslatef(-0.125, 0.075, 0.0);
 					glutSolidSphere(0.025, 10, 10);
 
@@ -1142,20 +1142,21 @@ GLuint table_lamp(GLuint rod1_tex, GLuint rod2_tex, GLuint cyl_fan){
 					glPushMatrix();
 						glEnable(GL_TEXTURE_2D);
 
-					glBindTexture(GL_TEXTURE_2D, cyl_fan);
-					glColor4f(1.0, 1.0, 1.0, 1.0); // reset color
+						glBindTexture(GL_TEXTURE_2D, cyl_fan);
+						glColor4f(1.0, 1.0, 1.0, 1.0); // reset color
 
-					glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-					glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+						glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+						glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+						glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+						glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+						glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+						glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
-						glColor3f(0.0, 1.0, 0.0);
+						//glColor3f(0.0, 1.0, 0.0);
 						glRotatef(-45, 0.0, 0.0, 1.0);
 						glRotatef(-90, 1.0, 0.0, 0.0);
 						glTranslatef(0.0, 0.0, -0.08);
+						glScalef(1.05, 1.05, 1.05);
 						gluQuadricTexture(quadratic, GL_TRUE);
 						gluCylinder( quadratic, 0.06, 0.005, 0.1, 20, 20);
 						glDisable(GL_TEXTURE_2D);
@@ -1249,8 +1250,8 @@ void draw_stool(GLuint stool_bottom_tex, GLuint stool_seat_tex){
 }
 
 
-void draw_table_lamp(GLuint rod1_tex, GLuint rod2_tex, GLuint cyl_fan){
-	GLuint t_lamp = table_lamp(rod1_tex, rod2_tex, cyl_fan);
+void draw_table_lamp(GLuint rod_tex, GLuint cyl_fan){
+	GLuint t_lamp = table_lamp(rod_tex, cyl_fan);
 	glCallList(t_lamp);
 }
 
